@@ -42,6 +42,7 @@ modelo_kvizinhos.fit(x_treino, y_treino)
 
 #modelo chutando tudo standard
 contagem_scores = tabela["score_credito"].value_counts()
+print("Testando a acurácia do modelo chutando tudo Standard(as divisões são: Poor, Standard, Good):")
 print(contagem_scores['Standard']/sum(contagem_scores))
 
 
@@ -51,7 +52,9 @@ from sklearn.metrics import accuracy_score
 pred_arvore = modelo_arvore.predict(x_teste)
 pred_kvizinhos = modelo_kvizinhos.predict(x_teste.to_numpy())
 #acurácia
+print("Acurácia do Modelo de Previsão de Árvores:")
 print(accuracy_score(y_teste,pred_arvore))
+print("Acurácia do Modelo de Previsão de K-vizinhos:")
 print(accuracy_score(y_teste,pred_kvizinhos))
 
 #importância das features 
