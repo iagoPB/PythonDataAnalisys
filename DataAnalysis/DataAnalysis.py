@@ -72,7 +72,7 @@ acuracia_kvizinhos = accuracy_score(y_teste, pred_kvizinhos)
 
 # Criando o gráfico de colunas com colunas finas
 plt.figure(figsize=(8, 6))
-plt.bar(['Random Forest'], [acuracia_arvore], width=0.3, label='Floresta Aleatória')
+plt.bar(['Floresta Aleatória'], [acuracia_arvore], width=0.3, label='Floresta Aleatória')
 plt.bar(['K-Vizinhos'], [acuracia_kvizinhos], width=0.3, label='K-Vizinhos')
 plt.bar(['Chute Standard'], [standard], width=0.3, label='Chute Standard')
 # Adicionando título e rótulos aos eixos
