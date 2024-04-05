@@ -43,7 +43,8 @@ modelo_kvizinhos.fit(x_treino, y_treino)
 #modelo chutando tudo standard
 contagem_scores = tabela["score_credito"].value_counts()
 print("Testando a acurácia do modelo chutando tudo Standard(as divisões são: Poor, Standard, Good):")
-print(contagem_scores['Standard']/sum(contagem_scores))
+standard = contagem_scores['Standard']/sum(contagem_scores)
+print(standard)
 
 
 
@@ -52,7 +53,7 @@ from sklearn.metrics import accuracy_score
 pred_arvore = modelo_arvore.predict(x_teste)
 pred_kvizinhos = modelo_kvizinhos.predict(x_teste.to_numpy())
 #acurácia
-print("Acurácia do Modelo de Previsão de Árvores:")
+print("Acurácia do Modelo de Previsão de Floresta Aleatória:")
 print(accuracy_score(y_teste,pred_arvore))
 print("Acurácia do Modelo de Previsão de K-vizinhos:")
 print(accuracy_score(y_teste,pred_kvizinhos))
@@ -62,5 +63,28 @@ colunas = list(x_teste.columns)
 importancia = pd.DataFrame(index=colunas, data = modelo_arvore.feature_importances_)
 importancia = importancia * 100
 print(importancia)
+
+import matplotlib.pyplot as plt
+
+# Acurácias dos modelos
+acuracia_arvore = accuracy_score(y_teste, pred_arvore)
+acuracia_kvizinhos = accuracy_score(y_teste, pred_kvizinhos)
+
+# Criando o gráfico de colunas com colunas finas
+plt.figure(figsize=(8, 6))
+plt.bar(['Random Forest'], [acuracia_arvore], width=0.3, label='Floresta Aleatória')
+plt.bar(['K-Vizinhos'], [acuracia_kvizinhos], width=0.3, label='K-Vizinhos')
+plt.bar(['Chute Standard'], [standard], width=0.3, label='Chute Standard')
+# Adicionando título e rótulos aos eixos
+plt.title('Comparação de Acurácia entre Modelos')
+plt.ylabel('Acurácia')
+
+# Adicionando legenda
+plt.legend()
+
+# Exibindo o gráfico
+plt.show()
+
+
 
 
